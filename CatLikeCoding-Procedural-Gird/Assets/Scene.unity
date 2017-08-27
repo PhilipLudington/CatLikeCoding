@@ -143,6 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xSize: 10
   ySize: 5
+  waitInSeconds: 0.02
 --- !u!23 &483416528
 MeshRenderer:
   m_ObjectHideFlags: 0
