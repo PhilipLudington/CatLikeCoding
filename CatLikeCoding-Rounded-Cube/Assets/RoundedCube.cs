@@ -99,7 +99,7 @@ public class RoundedCube : MonoBehaviour
 			}
 			for (int q = 0; q < zSize - 1; q++, v++)
 			{
-				tX = SetQuad(trianglesZ, tX, v, v + 1, v + ring, v + ring + 1);
+				tX = SetQuad(trianglesX, tX, v, v + 1, v + ring, v + ring + 1);
 			}
 
 			tX = SetQuad(trianglesX, tX, v, v - ring + 1, v + ring, v + 1);
