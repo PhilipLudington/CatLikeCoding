@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 447952438}
   - component: {fileID: 447952437}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Rounded Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

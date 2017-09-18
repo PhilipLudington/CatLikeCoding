@@ -19,7 +19,7 @@ public class RoundedCube : MonoBehaviour
 	private void Generate()
 	{
 		GetComponent<MeshFilter>().mesh = mesh = new Mesh();
-		mesh.name = "Procedural Cube";
+		mesh.name = "Rounded Cube";
 		CreateVertices();
 		CreateTriangles();
 	}
@@ -218,7 +218,6 @@ public class RoundedCube : MonoBehaviour
 		{
 			return;
 		}
-
 		for (int i = 0; i < vertices.Length; i++)
 		{
 			Gizmos.color = Color.black;
