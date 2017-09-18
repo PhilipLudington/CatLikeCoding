@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class ProceduralCube : MonoBehaviour
 {
-	// Size of the grid's x and y dimension
+
 	public int xSize, ySize, zSize;
 
 	private Mesh mesh;
@@ -19,21 +18,19 @@ public class ProceduralCube : MonoBehaviour
 	{
 		GetComponent<MeshFilter>().mesh = mesh = new Mesh();
 		mesh.name = "Procedural Cube";
-
-		CreateVerticies();
+		CreateVertices();
 		CreateTriangles();
 	}
 
-	private void CreateVerticies()
+	private void CreateVertices()
 	{
 		int cornerVertices = 8;
 		int edgeVertices = (xSize + ySize + zSize - 3) * 4;
-		int faceVertices = ((xSize - 1) * (ySize - 1) +
-		                   (xSize - 1) * (zSize - 1) +
-		                   (ySize - 1) * (zSize - 1)) * 2;
-		int verticesCount = cornerVertices + edgeVertices + faceVertices;
-
-		vertices = new Vector3[verticesCount];
+		int faceVertices = (
+		                       (xSize - 1) * (ySize - 1) +
+		                       (xSize - 1) * (zSize - 1) +
+		                       (ySize - 1) * (zSize - 1)) * 2;
+		vertices = new Vector3[cornerVertices + edgeVertices + faceVertices];
 
 		int v = 0;
 		for (int y = 0; y <= ySize; y++)
@@ -55,7 +52,6 @@ public class ProceduralCube : MonoBehaviour
 				vertices[v++] = new Vector3(0, y, z);
 			}
 		}
-
 		for (int z = 1; z < zSize; z++)
 		{
 			for (int x = 1; x < xSize; x++)
@@ -63,7 +59,6 @@ public class ProceduralCube : MonoBehaviour
 				vertices[v++] = new Vector3(x, ySize, z);
 			}
 		}
-
 		for (int z = 1; z < zSize; z++)
 		{
 			for (int x = 1; x < xSize; x++)
@@ -79,7 +74,6 @@ public class ProceduralCube : MonoBehaviour
 	{
 		int quads = (xSize * ySize + xSize * zSize + ySize * zSize) * 2;
 		int[] triangles = new int[quads * 6];
-
 		int ring = (xSize + zSize) * 2;
 		int t = 0, v = 0;
 
@@ -94,7 +88,6 @@ public class ProceduralCube : MonoBehaviour
 
 		t = CreateTopFace(triangles, t, ring);
 		t = CreateBottomFace(triangles, t, ring);
-
 		mesh.triangles = triangles;
 	}
 
@@ -114,15 +107,16 @@ public class ProceduralCube : MonoBehaviour
 		for (int z = 1; z < zSize - 1; z++, vMin--, vMid++, vMax++)
 		{
 			t = SetQuad(triangles, t, vMin, vMid, vMin - 1, vMid + xSize - 1);
-
 			for (int x = 1; x < xSize - 1; x++, vMid++)
 			{
-				t = SetQuad(triangles, t, vMid, vMid + 1, vMid + xSize - 1, vMid + xSize);
+				t = SetQuad(
+					triangles, t,
+					vMid, vMid + 1, vMid + xSize - 1, vMid + xSize);
 			}
 			t = SetQuad(triangles, t, vMid, vMax, vMid + xSize - 1, vMax + 1);
 		}
-		int vTop = vMin - 2;
 
+		int vTop = vMin - 2;
 		t = SetQuad(triangles, t, vMin, vMid, vTop + 1, vTop);
 		for (int x = 1; x < xSize - 1; x++, vTop--, vMid++)
 		{
@@ -138,7 +132,6 @@ public class ProceduralCube : MonoBehaviour
 		int v = 1;
 		int vMid = vertices.Length - (xSize - 1) * (zSize - 1);
 		t = SetQuad(triangles, t, ring - 1, vMid, 0, 1);
-
 		for (int x = 1; x < xSize - 1; x++, v++, vMid++)
 		{
 			t = SetQuad(triangles, t, vMid, vMid + 1, v, v + 1);
@@ -152,10 +145,11 @@ public class ProceduralCube : MonoBehaviour
 		for (int z = 1; z < zSize - 1; z++, vMin--, vMid++, vMax++)
 		{
 			t = SetQuad(triangles, t, vMin, vMid + xSize - 1, vMin + 1, vMid);
-
 			for (int x = 1; x < xSize - 1; x++, vMid++)
 			{
-				t = SetQuad(triangles, t, vMid + xSize - 1, vMid + xSize, vMid, vMid + 1);
+				t = SetQuad(
+					triangles, t,
+					vMid + xSize - 1, vMid + xSize, vMid, vMid + 1);
 			}
 			t = SetQuad(triangles, t, vMid + xSize - 1, vMax + 1, vMid, vMax);
 		}
@@ -167,20 +161,30 @@ public class ProceduralCube : MonoBehaviour
 			t = SetQuad(triangles, t, vTop, vTop - 1, vMid, vMid + 1);
 		}
 		t = SetQuad(triangles, t, vTop, vTop - 1, vMid, vTop - 2);
-	
+
 		return t;
 	}
 
-	private int SetQuad(int[] triangles, int i, int v00, int v10, int v01, int v11)
+	private static int
+	SetQuad(int[] triangles, int i, int v00, int v10, int v01, int v11)
 	{
 		triangles[i] = v00;
-		triangles[i + 1] = v01;
-		triangles[i + 2] = v10;
-
-		triangles[i + 4] = v01;
-		triangles[i + 3] = v10;
+		triangles[i + 1] = triangles[i + 4] = v01;
+		triangles[i + 2] = triangles[i + 3] = v10;
 		triangles[i + 5] = v11;
-
 		return i + 6;
+	}
+
+	private void OnDrawGizmos()
+	{
+		if (vertices == null)
+		{
+			return;
+		}
+		Gizmos.color = Color.black;
+		for (int i = 0; i < vertices.Length; i++)
+		{
+			Gizmos.DrawSphere(vertices[i], 0.1f);
+		}
 	}
 }
