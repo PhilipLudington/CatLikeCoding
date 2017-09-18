@@ -24,9 +24,8 @@
 		half _Glossiness;
 		half _Metallic;
 		fixed4 _Color;
-
-		void vert (inout appdata_full v, out Input o)
-		{
+		
+		void vert (inout appdata_full v, out Input o) {
 			UNITY_INITIALIZE_OUTPUT(Input, o);
 			#if defined(_FACES_X)
 				o.cubeUV = v.color.yz * 255;
@@ -38,7 +37,7 @@
 		}
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {
-			fixed4 c = tex2D(_MainTex, IN.cubeUV) * _Color;
+			fixed4 c = tex2D (_MainTex, IN.cubeUV) * _Color;
 			o.Albedo = c.rgb;
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;

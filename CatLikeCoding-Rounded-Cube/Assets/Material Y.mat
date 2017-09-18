@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Material Y
-  m_Shader: {fileID: 4800000, guid: 9cb3fbee6472d794693e369e99aae881, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8bdeff0506abe4d1880b9fdde4cf79c3, type: 3}
   m_ShaderKeywords: _FACES_Y
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
@@ -61,15 +61,11 @@ Material:
     - _DstBlend: 0
     - _EmissionScaleUI: 0
     - _Faces: 1
-    - _GlossMapScale: 1
     - _Glossiness: 0.5
-    - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
