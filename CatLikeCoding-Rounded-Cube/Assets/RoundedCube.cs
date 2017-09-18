@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class ProceduralCube : MonoBehaviour
+public class RoundedCube : MonoBehaviour
 {
 
 	public int xSize, ySize, zSize;
