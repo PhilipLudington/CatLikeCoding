@@ -19,7 +19,7 @@ public class RoundedCube : MonoBehaviour
 	private void Generate()
 	{
 		GetComponent<MeshFilter>().mesh = mesh = new Mesh();
-		mesh.name = "Rounded Cube";
+		mesh.name = "Procedural Cube";
 		CreateVertices();
 		CreateTriangles();
 	}
@@ -74,12 +74,44 @@ public class RoundedCube : MonoBehaviour
 		mesh.normals = normals;
 	}
 
+	private void SetVertex(int i, int x, int y, int z)
+	{
+		Vector3 inner = vertices[i] = new Vector3(x, y, z);
+
+		if (x < roundness)
+		{
+			inner.x = roundness;
+		}
+		else if (x > xSize - roundness)
+		{
+			inner.x = xSize - roundness;
+		}
+		if (y < roundness)
+		{
+			inner.y = roundness;
+		}
+		else if (y > ySize - roundness)
+		{
+			inner.y = ySize - roundness;
+		}
+		if (z < roundness)
+		{
+			inner.z = roundness;
+		}
+		else if (z > zSize - roundness)
+		{
+			inner.z = zSize - roundness;
+		}
+
+		normals[i] = (vertices[i] - inner).normalized;
+		vertices[i] = inner + normals[i] * roundness;
+	}
+
 	private void CreateTriangles()
 	{
 		int[] trianglesZ = new int[(xSize * ySize) * 12];
 		int[] trianglesX = new int[(ySize * zSize) * 12];
 		int[] trianglesY = new int[(xSize * zSize) * 12];
-
 		int ring = (xSize + zSize) * 2;
 		int tZ = 0, tX = 0, tY = 0, v = 0;
 
@@ -101,7 +133,6 @@ public class RoundedCube : MonoBehaviour
 			{
 				tX = SetQuad(trianglesX, tX, v, v + 1, v + ring, v + ring + 1);
 			}
-
 			tX = SetQuad(trianglesX, tX, v, v - ring + 1, v + ring, v + 1);
 		}
 
@@ -188,7 +219,8 @@ public class RoundedCube : MonoBehaviour
 		return t;
 	}
 
-	private static int SetQuad(int[] triangles, int i, int v00, int v10, int v01, int v11)
+	private static int
+	SetQuad(int[] triangles, int i, int v00, int v10, int v01, int v11)
 	{
 		triangles[i] = v00;
 		triangles[i + 1] = triangles[i + 4] = v01;
@@ -197,51 +229,15 @@ public class RoundedCube : MonoBehaviour
 		return i + 6;
 	}
 
-	private void SetVertex(int i, int x, int y, int z)
-	{
-		Vector3 inner = vertices[i] = new Vector3(x, y, z);
-
-		if (x < roundness)
-		{
-			inner.x = roundness;
-		}
-		else if (x > xSize - roundness)
-		{
-			inner.x = xSize - roundness;
-		}
-		if (y < roundness)
-		{
-			inner.y = roundness;
-		}
-		else if (y > ySize - roundness)
-		{
-			inner.y = ySize - roundness;
-		}
-		if (z < roundness)
-		{
-			inner.z = roundness;
-		}
-		else if (z > zSize - roundness)
-		{
-			inner.z = zSize - roundness;
-		}
-
-		normals[i] = (vertices[i] - inner).normalized;
-		vertices[i] = inner + normals[i] * roundness;
-	}
-
-	private void OnDrawGizmos()
-	{
-		if (vertices == null)
-		{
-			return;
-		}
-		for (int i = 0; i < vertices.Length; i++)
-		{
-			Gizmos.color = Color.black;
-			Gizmos.DrawSphere(vertices[i], 0.1f);
-			Gizmos.color = Color.yellow;
-			Gizmos.DrawRay(vertices[i], normals[i]);
-		}
-	}
+	//	private void OnDrawGizmos () {
+	//		if (vertices == null) {
+	//			return;
+	//		}
+	//		for (int i = 0; i < vertices.Length; i++) {
+	//			Gizmos.color = Color.black;
+	//			Gizmos.DrawSphere(vertices[i], 0.1f);
+	//			Gizmos.color = Color.yellow;
+	//			Gizmos.DrawRay(vertices[i], normals[i]);
+	//		}
+	//	}
 }
