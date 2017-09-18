@@ -23,6 +23,48 @@ public class RoundedCube : MonoBehaviour
 		mesh.name = "Procedural Cube";
 		CreateVertices();
 		CreateTriangles();
+		CreateColliders();
+	}
+
+	private void CreateColliders()
+	{
+		AddBoxCollider(xSize, ySize - roundness * 2, zSize - roundness * 2);
+		AddBoxCollider(xSize - roundness * 2, ySize, zSize - roundness * 2);
+		AddBoxCollider(xSize - roundness * 2, ySize - roundness * 2, zSize);
+
+		Vector3 min = Vector3.one * roundness;
+		Vector3 half = new Vector3(xSize, ySize, zSize) * 0.5f;
+		Vector3 max = new Vector3(zSize, ySize, zSize) - min;
+
+		AddCapsuleCollider(0, half.x, min.y, min.z);
+		AddCapsuleCollider(0, half.x, min.y, max.z);
+		AddCapsuleCollider(0, half.x, max.y, min.z);
+		AddCapsuleCollider(0, half.x, max.y, max.z);
+
+		AddCapsuleCollider(1, min.x, half.y, min.z);
+		AddCapsuleCollider(1, min.x, half.y, max.z);
+		AddCapsuleCollider(1, half.x, half.y, min.z);
+		AddCapsuleCollider(1, half.x, half.y, max.z);
+
+		AddCapsuleCollider(2, min.x, min.y, half.z);
+		AddCapsuleCollider(2, min.x, max.y, half.z);
+		AddCapsuleCollider(2, half.x, min.y, half.z);
+		AddCapsuleCollider(2, half.x, max.y, half.z);
+	}
+
+	private void AddBoxCollider(float x, float y, float z)
+	{
+		BoxCollider c = gameObject.AddComponent<BoxCollider>();
+		c.size = new Vector3(x, y, z);
+	}
+
+	private void AddCapsuleCollider(int direction, float x, float y, float z)
+	{
+		CapsuleCollider c = gameObject.AddComponent<CapsuleCollider>();
+		c.center = new Vector3(x, y, z);
+		c.direction = direction;
+		c.radius = roundness;
+		c.height = c.center[direction] * 2.0f;
 	}
 
 	private void CreateVertices()
