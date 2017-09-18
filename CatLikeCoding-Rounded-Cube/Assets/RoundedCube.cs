@@ -10,6 +10,7 @@ public class RoundedCube : MonoBehaviour
 	private Mesh mesh;
 	private Vector3[] vertices;
 	private Vector3[] normals;
+	private Color32[] cubeUV;
 
 	private void Awake()
 	{
@@ -34,6 +35,7 @@ public class RoundedCube : MonoBehaviour
 		                       (ySize - 1) * (zSize - 1)) * 2;
 		vertices = new Vector3[cornerVertices + edgeVertices + faceVertices];
 		normals = new Vector3[vertices.Length];
+		cubeUV = new Color32[vertices.Length];
 
 		int v = 0;
 		for (int y = 0; y <= ySize; y++)
@@ -72,6 +74,7 @@ public class RoundedCube : MonoBehaviour
 
 		mesh.vertices = vertices;
 		mesh.normals = normals;
+		mesh.colors32 = cubeUV;
 	}
 
 	private void SetVertex(int i, int x, int y, int z)
@@ -105,6 +108,7 @@ public class RoundedCube : MonoBehaviour
 
 		normals[i] = (vertices[i] - inner).normalized;
 		vertices[i] = inner + normals[i] * roundness;
+		cubeUV[i] = new Color32((byte)x, (byte)y, (byte)z, 0);
 	}
 
 	private void CreateTriangles()
