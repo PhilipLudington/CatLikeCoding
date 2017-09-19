@@ -16,12 +16,6 @@ Material:
     serializedVersion: 2
     m_TexEnvs:
     - first:
-        name: <noninit>
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
         name: _BumpMap
       second:
         m_Texture: {fileID: 0}
@@ -49,13 +43,13 @@ Material:
         name: _EmissionMap
       second:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 2, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: f991e4ecd62e74fb0bc83cdbbb427c8c, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 2, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MetallicGlossMap
@@ -77,9 +71,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - first:
-        name: <noninit>
-      second: 0
-    - first:
         name: _BumpScale
       second: 1
     - first:
@@ -91,6 +82,12 @@ Material:
     - first:
         name: _DstBlend
       second: 0
+    - first:
+        name: _EmissionScaleUI
+      second: 0
+    - first:
+        name: _Faces
+      second: 2
     - first:
         name: _GlossMapScale
       second: 1
@@ -129,11 +126,11 @@ Material:
       second: 1
     m_Colors:
     - first:
-        name: <noninit>
-      second: {r: 0, g: 1, b: 0, a: NaN}
-    - first:
         name: _Color
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
-      second: {r: 0, g: 0, b: 0, a: 1}
+      second: {r: 0, g: 0, b: 0, a: 0}
+    - first:
+        name: _EmissionColorUI
+      second: {r: 1, g: 1, b: 1, a: 1}
