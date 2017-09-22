@@ -3,6 +3,7 @@
 [RequireComponent(typeof(MeshFilter))]
 public class MeshDeformer : MonoBehaviour
 {
+
 	Mesh deformingMesh;
 	Vector3[] originalVertices, displacedVertices;
 	Vector3[] vertexVelocities;
@@ -46,8 +47,8 @@ public class MeshDeformer : MonoBehaviour
 	void AddForceToVertex(int i, Vector3 point, float force)
 	{
 		Vector3 pointToVertex = displacedVertices[i] - point;
-		float attenuatedRorce = force / (1.0f + pointToVertex.sqrMagnitude);
-		float velocity = attenuatedRorce * Time.deltaTime;
+		float attenuatedForce = force / (1f + pointToVertex.sqrMagnitude);
+		float velocity = attenuatedForce * Time.deltaTime;
 		vertexVelocities[i] += pointToVertex.normalized * velocity;
 	}
 }

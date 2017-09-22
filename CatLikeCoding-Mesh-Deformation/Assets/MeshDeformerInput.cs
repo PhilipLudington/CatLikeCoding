@@ -2,6 +2,7 @@
 
 public class MeshDeformerInput : MonoBehaviour
 {
+	
 	public float force = 10f;
 	public float forceOffset = 0.1f;
 
