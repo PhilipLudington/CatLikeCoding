@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MeshDeformerInput : MonoBehaviour
 {
-	public float force = 10.0f;
+	public float force = 10f;
 	public float forceOffset = 0.1f;
 
 	void Update()
@@ -19,11 +17,10 @@ public class MeshDeformerInput : MonoBehaviour
 	{
 		Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-
+		
 		if (Physics.Raycast(inputRay, out hit))
 		{
 			MeshDeformer deformer = hit.collider.GetComponent<MeshDeformer>();
-
 			if (deformer)
 			{
 				Vector3 point = hit.point;

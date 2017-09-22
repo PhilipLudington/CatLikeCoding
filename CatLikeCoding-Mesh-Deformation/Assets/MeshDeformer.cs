@@ -3,7 +3,6 @@
 [RequireComponent(typeof(MeshFilter))]
 public class MeshDeformer : MonoBehaviour
 {
-
 	Mesh deformingMesh;
 	Vector3[] originalVertices, displacedVertices;
 	Vector3[] vertexVelocities;
