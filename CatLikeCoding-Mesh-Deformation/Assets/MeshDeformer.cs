@@ -10,6 +10,7 @@ public class MeshDeformer : MonoBehaviour
 	Mesh deformingMesh;
 	Vector3[] originalVertices, displacedVertices;
 	Vector3[] vertexVelocities;
+
 	float uniformScale = 1f;
 
 	void Start()
@@ -43,13 +44,12 @@ public class MeshDeformer : MonoBehaviour
 		velocity -= displacement * springForce * Time.deltaTime;
 		velocity *= 1f - damping * Time.deltaTime;
 		vertexVelocities[i] = velocity;
-		displacedVertices[i] += velocity * (Time.deltaTime / uniformScale); 
+		displacedVertices[i] += velocity * (Time.deltaTime / uniformScale);
 	}
 
 	public void AddDeformingForce(Vector3 point, float force)
 	{
 		point = transform.InverseTransformPoint(point);
-
 		for (int i = 0; i < displacedVertices.Length; i++)
 		{
 			AddForceToVertex(i, point, force);
