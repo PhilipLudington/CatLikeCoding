@@ -46,7 +46,7 @@ public class HexGrid : MonoBehaviour
 		HexCell cell = cells[i] = Instantiate<HexCell>(cellPrefab);
 		cell.transform.SetParent(transform, false);
 		cell.transform.localPosition = position;
-		cell.coordinates = HexCoordinates.FromOffsetCorrdinates(x, z);
+		cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
 
 		Text label = Instantiate<Text>(cellLabelPrefab);
 		label.rectTransform.SetParent(gridCanvas.transform, false);
