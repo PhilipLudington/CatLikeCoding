@@ -43,7 +43,7 @@ public class HexGrid : MonoBehaviour
 		position.y = 0f;
 		position.z = z * (HexMetrics.outerRadius * 1.5f);
 
-		HexCell cell = Instantiate<HexCell>(cellPrefab);
+		HexCell cell = cells[i] = Instantiate<HexCell>(cellPrefab);
 		cell.transform.SetParent(transform, false);
 		cell.transform.localPosition = position;
 
