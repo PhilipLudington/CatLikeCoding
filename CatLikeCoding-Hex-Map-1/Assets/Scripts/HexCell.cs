@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-public class HexCell : MonoBehaviour
-{
+public class HexCell : MonoBehaviour {
 
 	public HexCoordinates coordinates;
 
