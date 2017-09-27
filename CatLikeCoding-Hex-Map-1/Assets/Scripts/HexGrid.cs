@@ -7,11 +7,11 @@ public class HexGrid : MonoBehaviour
 	public int width = 6;
 	public int height = 6;
 
-	public HexCell cellPrefab;
-	public Text cellLabelPrefab;
-
 	public Color defaultColor = Color.white;
 	public Color touchedColor = Color.magenta;
+
+	public HexCell cellPrefab;
+	public Text cellLabelPrefab;
 
 	HexCell[] cells;
 

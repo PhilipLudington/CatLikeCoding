@@ -43,6 +43,7 @@ MonoBehaviour:
   coordinates:
     x: 0
     z: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

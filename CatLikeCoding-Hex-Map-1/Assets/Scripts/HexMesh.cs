@@ -7,10 +7,10 @@ public class HexMesh : MonoBehaviour
 
 	Mesh hexMesh;
 	List<Vector3> vertices;
+	List<Color> colors;
 	List<int> triangles;
 
 	MeshCollider meshCollider;
-	List<Color> colors;
 
 	void Awake()
 	{
@@ -19,7 +19,6 @@ public class HexMesh : MonoBehaviour
 		hexMesh.name = "Hex Mesh";
 		vertices = new List<Vector3>();
 		colors = new List<Color>();
-
 		triangles = new List<int>();
 	}
 
@@ -28,16 +27,14 @@ public class HexMesh : MonoBehaviour
 		hexMesh.Clear();
 		vertices.Clear();
 		colors.Clear();
-
 		triangles.Clear();
 		for (int i = 0; i < cells.Length; i++)
 		{
 			Triangulate(cells[i]);
 		}
 		hexMesh.vertices = vertices.ToArray();
-		hexMesh.triangles = triangles.ToArray();
 		hexMesh.colors = colors.ToArray();
-
+		hexMesh.triangles = triangles.ToArray();
 		hexMesh.RecalculateNormals();
 		meshCollider.sharedMesh = hexMesh;
 	}
@@ -54,7 +51,6 @@ public class HexMesh : MonoBehaviour
 			);
 			AddTriangleColor(cell.color);
 		}
-		meshCollider.sharedMesh = hexMesh;
 	}
 
 	void AddTriangle(Vector3 v1, Vector3 v2, Vector3 v3)
