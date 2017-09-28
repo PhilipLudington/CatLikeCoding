@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum HexDirection
+﻿public enum HexDirection
 {
 	NE,
 	E,
@@ -12,8 +8,9 @@ public enum HexDirection
 	NW
 }
 
-public static class HexDirectionExcensions
+public static class HexDirectionExtensions
 {
+
 	public static HexDirection Opposite(this HexDirection direction)
 	{
 		return (int)direction < 3 ? (direction + 3) : (direction - 3);

@@ -65,7 +65,6 @@ public class HexGrid : MonoBehaviour
 		{
 			cell.SetNeighbor(HexDirection.W, cells[i - 1]);
 		}
-
 		if (z > 0)
 		{
 			if ((z & 1) == 0)
@@ -75,7 +74,6 @@ public class HexGrid : MonoBehaviour
 				{
 					cell.SetNeighbor(HexDirection.SW, cells[i - width - 1]);
 				}
-
 			}
 			else
 			{
