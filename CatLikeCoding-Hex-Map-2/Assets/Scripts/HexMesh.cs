@@ -62,7 +62,9 @@ public class HexMesh : MonoBehaviour
 		}
 	}
 
-	void TriangulateConnection(HexDirection direction, HexCell cell, Vector3 v1, Vector3 v2)
+	void TriangulateConnection(
+		HexDirection direction, HexCell cell, Vector3 v1, Vector3 v2
+	)
 	{
 		HexCell neighbor = cell.GetNeighbor(direction);
 		if (neighbor == null)
