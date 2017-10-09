@@ -37,6 +37,8 @@ public static class HexMetrics
 
 	public const float noiseScale = 0.003f;
 
+	public const float elevationPerturbStrength = 1.5f;
+
 	public static Vector4 SampleNoise(Vector3 position)
 	{
 		return noiseSource.GetPixelBilinear(
