@@ -392,7 +392,6 @@ public class HexMesh : MonoBehaviour
 		position.x += (sample.x * 2f - 1f) * HexMetrics.cellPerturbStrength;
 		position.y += (sample.y * 2f - 1f) * HexMetrics.cellPerturbStrength;
 		position.z += (sample.z * 2f - 1f) * HexMetrics.cellPerturbStrength;
-
 		return position;
 	}
 }
