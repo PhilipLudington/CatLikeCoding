@@ -21,6 +21,8 @@ public class HexGrid : MonoBehaviour
 
 	void Awake()
 	{
+		HexMetrics.noiseSource = noiseSource;
+
 		gridCanvas = GetComponentInChildren<Canvas>();
 		hexMesh = GetComponentInChildren<HexMesh>();
 
