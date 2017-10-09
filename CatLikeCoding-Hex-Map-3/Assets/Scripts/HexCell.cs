@@ -5,13 +5,16 @@ public class HexCell : MonoBehaviour
 
 	public HexCoordinates coordinates;
 
+	public Color color;
+
+	public RectTransform uiRect;
+
 	public int Elevation
 	{
 		get
 		{
 			return elevation;
 		}
-
 		set
 		{
 			elevation = value;
@@ -25,14 +28,10 @@ public class HexCell : MonoBehaviour
 		}
 	}
 
-	private int elevation;
-
-	public Color color;
+	int elevation;
 
 	[SerializeField]
 	HexCell[] neighbors;
-
-	public RectTransform uiRect;
 
 	public HexCell GetNeighbor(HexDirection direction)
 	{

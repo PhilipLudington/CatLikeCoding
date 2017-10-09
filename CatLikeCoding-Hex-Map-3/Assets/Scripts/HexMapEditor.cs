@@ -8,8 +8,19 @@ public class HexMapEditor : MonoBehaviour
 
 	public HexGrid hexGrid;
 
-	private Color activeColor;
 	int activeElevation;
+
+	Color activeColor;
+
+	public void SelectColor(int index)
+	{
+		activeColor = colors[index];
+	}
+
+	public void SetElevation(float elevation)
+	{
+		activeElevation = (int)elevation;
+	}
 
 	void Awake()
 	{
@@ -36,20 +47,10 @@ public class HexMapEditor : MonoBehaviour
 		}
 	}
 
-	public void SelectColor(int index)
-	{
-		activeColor = colors[index];
-	}
-
 	void EditCell(HexCell cell)
 	{
 		cell.color = activeColor;
 		cell.Elevation = activeElevation;
 		hexGrid.Refresh();
-	}
-
-	public void SetElevation(float elevation)
-	{
-		activeElevation = (int)elevation;
 	}
 }

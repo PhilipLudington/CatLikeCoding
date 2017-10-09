@@ -84,6 +84,7 @@ public class HexMesh : MonoBehaviour
 		if (direction <= HexDirection.E && nextNeighbor != null)
 		{
 			Vector3 v5 = v2 + HexMetrics.GetBridge(direction.Next());
+			v5.y = nextNeighbor.Elevation * HexMetrics.elevationStep;
 			AddTriangle(v2, v4, v5);
 			AddTriangleColor(cell.color, neighbor.color, nextNeighbor.color);
 		}
