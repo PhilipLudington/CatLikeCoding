@@ -19,7 +19,7 @@ public static class HexMetrics
 
 	public const float horizontalTerraceStepSize = 1f / terraceSteps;
 
-	public const float verticalTeraceStepSize = 1f / (terracesPerSlope + 1);
+	public const float verticalTerraceStepSize = 1f / (terracesPerSlope + 1);
 
 	static Vector3[] corners = {
 		new Vector3(0f, 0f, outerRadius),
@@ -62,7 +62,7 @@ public static class HexMetrics
 		float h = step * HexMetrics.horizontalTerraceStepSize;
 		a.x += (b.x - a.x) * h;
 		a.z += (b.z - a.z) * h;
-		float v = ((step + 1) / 2) * HexMetrics.verticalTeraceStepSize;
+		float v = ((step + 1) / 2) * HexMetrics.verticalTerraceStepSize;
 		a.y += (b.y - a.y) * v;
 		return a;
 	}
