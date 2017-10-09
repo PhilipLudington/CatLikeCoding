@@ -12,6 +12,8 @@ public class HexGrid : MonoBehaviour
 	public HexCell cellPrefab;
 	public Text cellLabelPrefab;
 
+	public Texture2D noiseSource;
+
 	HexCell[] cells;
 
 	Canvas gridCanvas;
@@ -36,6 +38,11 @@ public class HexGrid : MonoBehaviour
 	void Start()
 	{
 		hexMesh.Triangulate(cells);
+	}
+
+	void OnEnable()
+	{
+		HexMetrics.noiseSource = noiseSource;
 	}
 
 	public HexCell GetCell(Vector3 position)
