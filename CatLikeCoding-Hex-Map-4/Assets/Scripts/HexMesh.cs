@@ -317,7 +317,7 @@ public class HexMesh : MonoBehaviour
 		Vector3 v2 = Perturb(HexMetrics.TerraceLerp(begin, left, 1));
 		Color c2 = HexMetrics.TerraceLerp(beginCell.color, leftCell.color, 1);
 
-		AddTriangleUnperturbed(Perturb(begin), Perturb(v2), boundary);
+		AddTriangleUnperturbed(Perturb(begin), v2, boundary);
 		AddTriangleColor(beginCell.color, c2, boundaryColor);
 
 		for (int i = 2; i < HexMetrics.terraceSteps; i++)
@@ -326,7 +326,7 @@ public class HexMesh : MonoBehaviour
 			Color c1 = c2;
 			v2 = Perturb(HexMetrics.TerraceLerp(begin, left, i));
 			c2 = HexMetrics.TerraceLerp(beginCell.color, leftCell.color, i);
-			AddTriangleUnperturbed(Perturb(v1), v2, boundary);
+			AddTriangleUnperturbed(v1, v2, boundary);
 			AddTriangleColor(c1, c2, boundaryColor);
 		}
 
