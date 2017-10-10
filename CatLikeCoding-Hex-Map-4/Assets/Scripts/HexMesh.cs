@@ -99,20 +99,28 @@ public class HexMesh : MonoBehaviour
 			{
 				if (cell.Elevation <= nextNeighbor.Elevation)
 				{
-					TriangulateCorner(e1.v4, cell, e2.v4, neighbor, v5, nextNeighbor);
+					TriangulateCorner(
+						e1.v4, cell, e2.v4, neighbor, v5, nextNeighbor
+					);
 				}
 				else
 				{
-					TriangulateCorner(v5, nextNeighbor, e1.v4, cell, e2.v4, neighbor);
+					TriangulateCorner(
+						v5, nextNeighbor, e1.v4, cell, e2.v4, neighbor
+					);
 				}
 			}
 			else if (neighbor.Elevation <= nextNeighbor.Elevation)
 			{
-				TriangulateCorner(e2.v4, neighbor, v5, nextNeighbor, e1.v4, cell);
+				TriangulateCorner(
+					e2.v4, neighbor, v5, nextNeighbor, e1.v4, cell
+				);
 			}
 			else
 			{
-				TriangulateCorner(v5, nextNeighbor, e1.v4, cell, e2.v4, neighbor);
+				TriangulateCorner(
+					v5, nextNeighbor, e1.v4, cell, e2.v4, neighbor
+				);
 			}
 		}
 	}
@@ -200,7 +208,7 @@ public class HexMesh : MonoBehaviour
 			Color c1 = c2;
 			e2 = EdgeVertices.TerraceLerp(begin, end, i);
 			c2 = HexMetrics.TerraceLerp(beginCell.color, endCell.color, i);
-			TriangulateEdgeStrip(e2, c1, e2, c2);
+			TriangulateEdgeStrip(e1, c1, e2, c2);
 		}
 
 		TriangulateEdgeStrip(e2, c2, end, endCell.color);
@@ -326,6 +334,29 @@ public class HexMesh : MonoBehaviour
 		AddTriangleColor(c2, leftCell.color, boundaryColor);
 	}
 
+	void TriangulateEdgeFan(Vector3 center, EdgeVertices edge, Color color)
+	{
+		AddTriangle(center, edge.v1, edge.v2);
+		AddTriangleColor(color);
+		AddTriangle(center, edge.v2, edge.v3);
+		AddTriangleColor(color);
+		AddTriangle(center, edge.v3, edge.v4);
+		AddTriangleColor(color);
+	}
+
+	void TriangulateEdgeStrip(
+		EdgeVertices e1, Color c1,
+		EdgeVertices e2, Color c2
+	)
+	{
+		AddQuad(e1.v1, e1.v2, e2.v1, e2.v2);
+		AddQuadColor(c1, c2);
+		AddQuad(e1.v2, e1.v3, e2.v2, e2.v3);
+		AddQuadColor(c1, c2);
+		AddQuad(e1.v3, e1.v4, e2.v3, e2.v4);
+		AddQuadColor(c1, c2);
+	}
+
 	void AddTriangle(Vector3 v1, Vector3 v2, Vector3 v3)
 	{
 		int vertexIndex = vertices.Count;
@@ -388,28 +419,5 @@ public class HexMesh : MonoBehaviour
 		position.x += (sample.x * 2f - 1f) * HexMetrics.cellPerturbStrength;
 		position.z += (sample.z * 2f - 1f) * HexMetrics.cellPerturbStrength;
 		return position;
-	}
-
-	void TriangulateEdgeFan(Vector3 center, EdgeVertices edge, Color color)
-	{
-		AddTriangle(center, edge.v1, edge.v2);
-		AddTriangleColor(color);
-		AddTriangle(center, edge.v2, edge.v3);
-		AddTriangleColor(color);
-		AddTriangle(center, edge.v3, edge.v4);
-		AddTriangleColor(color);
-	}
-
-	void TriangulateEdgeStrip(
-		EdgeVertices e1, Color c1,
-		EdgeVertices e2, Color c2
-	)
-	{
-		AddQuad(e1.v1, e1.v2, e2.v1, e2.v2);
-		AddQuadColor(c1, c2);
-		AddQuad(e1.v2, e1.v3, e2.v2, e2.v3);
-		AddQuadColor(c1, c2);
-		AddQuad(e1.v3, e1.v4, e2.v3, e2.v4);
-		AddQuadColor(c1, c2);
 	}
 }
