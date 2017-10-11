@@ -51,6 +51,5 @@ public class HexMapEditor : MonoBehaviour
 	{
 		cell.Color = activeColor;
 		cell.Elevation = activeElevation;
-//		hexGrid.Refresh();
 	}
 }

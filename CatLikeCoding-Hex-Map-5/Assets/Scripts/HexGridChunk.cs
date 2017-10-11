@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class HexGridChunk : MonoBehaviour
 {
+
 	HexCell[] cells;
 
 	HexMesh hexMesh;
@@ -12,12 +13,9 @@ public class HexGridChunk : MonoBehaviour
 	{
 		gridCanvas = GetComponentInChildren<Canvas>();
 		hexMesh = GetComponentInChildren<HexMesh>();
-	}
 
-	//	void Start()
-	//	{
-	//		hexMesh.Triangulate(cells);
-	//	}
+		cells = new HexCell[HexMetrics.chunkSizeX * HexMetrics.chunkSizeZ];
+	}
 
 	public void AddCell(int index, HexCell cell)
 	{

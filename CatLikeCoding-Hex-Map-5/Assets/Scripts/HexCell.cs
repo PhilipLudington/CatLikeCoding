@@ -5,6 +5,10 @@ public class HexCell : MonoBehaviour
 
 	public HexCoordinates coordinates;
 
+	public RectTransform uiRect;
+
+	public HexGridChunk chunk;
+
 	public Color Color
 	{
 		get
@@ -21,12 +25,6 @@ public class HexCell : MonoBehaviour
 			Refresh();
 		}
 	}
-
-	private Color color;
-
-	public RectTransform uiRect;
-
-	public HexGridChunk chunk;
 
 	public int Elevation
 	{
@@ -51,7 +49,6 @@ public class HexCell : MonoBehaviour
 			Vector3 uiPosition = uiRect.localPosition;
 			uiPosition.z = -position.y;
 			uiRect.localPosition = uiPosition;
-
 			Refresh();
 		}
 	}
@@ -63,6 +60,8 @@ public class HexCell : MonoBehaviour
 			return transform.localPosition;
 		}
 	}
+
+	Color color;
 
 	int elevation = int.MinValue;
 
