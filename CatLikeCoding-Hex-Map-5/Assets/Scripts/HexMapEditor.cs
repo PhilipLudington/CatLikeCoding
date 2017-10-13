@@ -12,9 +12,10 @@ public class HexMapEditor : MonoBehaviour
 
 	Color activeColor;
 
+	int brushSize;
+
 	bool applyColor;
 	bool applyElevation = true;
-	int brushSize;
 
 	public void SelectColor(int index)
 	{
@@ -25,19 +26,24 @@ public class HexMapEditor : MonoBehaviour
 		}
 	}
 
-	public void SetElevation(float elevation)
-	{
-		activeElevation = (int)elevation;
-	}
-
 	public void SetApplyElevation(bool toggle)
 	{
 		applyElevation = toggle;
 	}
 
+	public void SetElevation(float elevation)
+	{
+		activeElevation = (int)elevation;
+	}
+
 	public void SetBrushSize(float size)
 	{
 		brushSize = (int)size;
+	}
+
+	public void ShowUI(bool visible)
+	{
+		hexGrid.ShowUI(visible);
 	}
 
 	void Awake()
@@ -77,7 +83,6 @@ public class HexMapEditor : MonoBehaviour
 				EditCell(hexGrid.GetCell(new HexCoordinates(x, z)));
 			}
 		}
-
 		for (int r = 0, z = centerZ + brushSize; z > centerZ; z--, r++)
 		{
 			for (int x = centerX - brushSize; x <= centerX + r; x++)
@@ -100,10 +105,5 @@ public class HexMapEditor : MonoBehaviour
 				cell.Elevation = activeElevation;
 			}
 		}
-	}
-
-	public void ShowUI(bool visible)
-	{
-		hexGrid.ShowUI(visible);
 	}
 }

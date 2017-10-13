@@ -31,14 +31,14 @@ public class HexGridChunk : MonoBehaviour
 		enabled = true;
 	}
 
+	public void ShowUI(bool visible)
+	{
+		gridCanvas.gameObject.SetActive(visible);
+	}
+
 	void LateUpdate()
 	{
 		hexMesh.Triangulate(cells);
 		enabled = false;
-	}
-
-	public void ShowUI(bool visible)
-	{
-		gridCanvas.gameObject.SetActive(visible);
 	}
 }
