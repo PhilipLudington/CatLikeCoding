@@ -127,7 +127,7 @@ public class HexCell : MonoBehaviour
 	{
 		get
 		{
-			return 
+			return
 				(elevation + HexMetrics.streamBedElevationOffset) *
 			HexMetrics.elevationStep;
 		}
@@ -257,5 +257,4 @@ public class HexCell : MonoBehaviour
 	{
 		chunk.Refresh();
 	}
-
 }
