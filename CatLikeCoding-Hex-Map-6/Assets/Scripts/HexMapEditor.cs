@@ -3,14 +3,6 @@ using UnityEngine.EventSystems;
 
 public class HexMapEditor : MonoBehaviour
 {
-	enum OptionalToggle
-	{
-		Ignore,
-		Yes,
-		No
-	}
-
-	OptionalToggle riverMode;
 
 	public Color[] colors;
 
@@ -24,6 +16,16 @@ public class HexMapEditor : MonoBehaviour
 
 	bool applyColor;
 	bool applyElevation = true;
+
+	enum OptionalToggle
+	{
+		Ignore,
+		Yes,
+		No
+	}
+
+	OptionalToggle riverMode;
+
 	bool isDrag;
 	HexDirection dragDirection;
 	HexCell previousCell;
@@ -50,6 +52,11 @@ public class HexMapEditor : MonoBehaviour
 	public void SetBrushSize(float size)
 	{
 		brushSize = (int)size;
+	}
+
+	public void SetRiverMode(int mode)
+	{
+		riverMode = (OptionalToggle)mode;
 	}
 
 	public void ShowUI(bool visible)
@@ -82,18 +89,17 @@ public class HexMapEditor : MonoBehaviour
 		RaycastHit hit;
 		if (Physics.Raycast(inputRay, out hit))
 		{
-			HexCell currectCell = hexGrid.GetCell(hit.point);
-			if (previousCell && previousCell != currectCell)
+			HexCell currentCell = hexGrid.GetCell(hit.point);
+			if (previousCell && previousCell != currentCell)
 			{
-				ValidateDrag(currectCell);
+				ValidateDrag(currentCell);
 			}
 			else
 			{
 				isDrag = false;
 			}
-			EditCells(currectCell);
-			previousCell = currectCell;
-			isDrag = true;
+			EditCells(currentCell);
+			previousCell = currentCell;
 		}
 		else
 		{
@@ -103,7 +109,10 @@ public class HexMapEditor : MonoBehaviour
 
 	void ValidateDrag(HexCell currentCell)
 	{
-		for (dragDirection = HexDirection.NE; dragDirection < HexDirection.NW; dragDirection++)
+		for (
+			dragDirection = HexDirection.NE;
+			dragDirection <= HexDirection.NW;
+			dragDirection++)
 		{
 			if (previousCell.GetNeighbor(dragDirection) == currentCell)
 			{
@@ -153,13 +162,12 @@ public class HexMapEditor : MonoBehaviour
 			}
 			else if (isDrag && riverMode == OptionalToggle.Yes)
 			{
-				previousCell.SetOutgoingRiver(dragDirection);
+				HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
+				if (otherCell)
+				{
+					otherCell.SetOutgoingRiver(dragDirection);
+				}
 			}
 		}
-	}
-
-	public void SetRiverMode(int mode)
-	{
-		riverMode = (OptionalToggle)mode;
 	}
 }
