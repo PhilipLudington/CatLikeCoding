@@ -1,42 +1,43 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿using System;
+using UnityEngine;
 
-public class Clock : MonoBehaviour
-{
-    public Transform Hours;
-    public Transform Minutes;
-    public Transform Seconds;
-    public bool IsAnalogy;
+public class Clock : MonoBehaviour {
 
-    private const float hoursToDegrees = 360 / 12.0f;
-    private const float minutesToDegrees = 360 / 60.0f;
-    private const float secondsToDegrees = 360 / 60.0f;
+	const float
+		degreesPerHour = 30f,
+		degreesPerMinute = 6f,
+		degreesPerSecond = 6f;
 
-    // Use this for initialization
-    private void Start()
-    {
+	public Transform hoursTransform, minutesTransform, secondsTransform;
 
-    }
+	public bool continuous;
 
-    // Update is called once per frame
-    private void Update()
-    {
-        if (IsAnalogy)
-        {
-            TimeSpan timeSpan = DateTime.Now.TimeOfDay;
+	void Update () {
+		if (continuous) {
+			UpdateContinuous();
+		}
+		else {
+			UpdateDiscrete();
+		}
+	}
 
-            Hours.transform.localRotation = Quaternion.Euler(0, 0, (float)timeSpan.TotalHours * -hoursToDegrees);
-            Minutes.transform.localRotation = Quaternion.Euler(0, 0, (float)timeSpan.TotalMinutes * -minutesToDegrees);
-            Seconds.transform.localRotation = Quaternion.Euler(0, 0, (float)timeSpan.TotalSeconds * -secondsToDegrees);
-        }
-        else
-        {
-            DateTime dateTime = DateTime.Now;
+	void UpdateContinuous () {
+		TimeSpan time = DateTime.Now.TimeOfDay;
+		hoursTransform.localRotation =
+			Quaternion.Euler(0f, (float)time.TotalHours * degreesPerHour, 0f);
+		minutesTransform.localRotation =
+			Quaternion.Euler(0f, (float)time.TotalMinutes * degreesPerMinute, 0f);
+		secondsTransform.localRotation =
+			Quaternion.Euler(0f, (float)time.TotalSeconds * degreesPerSecond, 0f);
+	}
 
-            Hours.transform.localRotation = Quaternion.Euler(0, 0, dateTime.Hour * -hoursToDegrees);
-            Minutes.transform.localRotation = Quaternion.Euler(0, 0, dateTime.Minute * -minutesToDegrees);
-            Seconds.transform.localRotation = Quaternion.Euler(0, 0, dateTime.Second * -secondsToDegrees);
-        }
-    }
+	void UpdateDiscrete () {
+		DateTime time = DateTime.Now;
+		hoursTransform.localRotation =
+			Quaternion.Euler(0f, time.Hour * degreesPerHour, 0f);
+		minutesTransform.localRotation =
+			Quaternion.Euler(0f, time.Minute * degreesPerMinute, 0f);
+		secondsTransform.localRotation =
+			Quaternion.Euler(0f, time.Second * degreesPerSecond, 0f);
+	}
 }
