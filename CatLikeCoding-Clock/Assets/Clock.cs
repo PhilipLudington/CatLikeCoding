@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class ClockAnimator : MonoBehaviour
+public class Clock : MonoBehaviour
 {
     public Transform Hours;
     public Transform Minutes;
